@@ -9,10 +9,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- ══════════════════════════════════════
-     LOGIN OVERLAY
-══════════════════════════════════════ -->
 <div id="login-overlay">
   <div class="login-box">
     <div class="login-logo">
@@ -26,8 +22,6 @@
       <button class="login-tab active" id="tabLogin" onclick="switchLoginTab('login')">Login</button>
       <button class="login-tab" id="tabReg" onclick="switchLoginTab('register')">Register</button>
     </div>
-
-    <!-- LOGIN FORM -->
     <div class="login-form" id="loginForm">
       <div class="lf-group">
         <label>Username</label>
@@ -39,8 +33,6 @@
       </div>
       <button class="btn-login" onclick="doLogin()">Login →</button>
     </div>
-
-    <!-- REGISTER FORM -->
     <div class="login-form hidden" id="registerForm">
       <div class="lf-group">
         <label>Username *</label>
@@ -67,13 +59,7 @@
     </div>
   </div>
 </div>
-
-<!-- ══════════════════════════════════════
-     MAIN APP
-══════════════════════════════════════ -->
 <div id="main-app" class="hidden">
-
-  <!-- HEADER -->
   <header>
     <div class="logo" onclick="navigateTo('home')">
       <div class="logo-icon">🌿</div>
@@ -100,14 +86,8 @@
       <button class="hamburger" id="ham" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
     </div>
   </header>
-
-  <!-- MOBILE NAV -->
   <nav class="mobile-nav" id="mobileNav"></nav>
-
-  <!-- PAGE CONTAINER -->
   <div id="page-container">
-
-    <!-- ── HOME ── -->
     <div class="page active" id="page-home">
       <div class="hero-section">
         <div class="hero-inner">
@@ -150,8 +130,6 @@
         <div class="home-services-grid" id="homeSvcGrid"></div>
       </div>
     </div>
-
-    <!-- ── CROP CALENDAR ── -->
     <div class="page" id="page-calendar">
       <div class="page-inner">
         <div class="page-header">
@@ -163,8 +141,6 @@
         <div class="crop-grid" id="cropGrid"></div>
       </div>
     </div>
-
-    <!-- ── CROP SUGGESTION ── -->
     <div class="page" id="page-suggest">
       <div class="page-inner">
         <div class="page-header">
@@ -226,8 +202,6 @@
         </div>
       </div>
     </div>
-
-    <!-- ── WEATHER ── -->
     <div class="page" id="page-weather">
       <div class="page-inner">
         <div class="page-header">
@@ -256,8 +230,6 @@
         </div>
       </div>
     </div>
-
-    <!-- ── MARKET ── -->
     <div class="page" id="page-market">
       <div class="page-inner">
         <div class="page-header">
@@ -304,8 +276,6 @@
         </div>
       </div>
     </div>
-
-    <!-- ── SCHEMES ── -->
     <div class="page" id="page-schemes">
       <div class="page-inner">
         <div class="page-header">
@@ -325,8 +295,6 @@
         </div>
       </div>
     </div>
-
-    <!-- ── CHATBOT ── -->
     <div class="page" id="page-chatbot">
       <div class="page-inner">
         <div class="page-header">
@@ -335,7 +303,6 @@
           <p class="page-sub dark" data-i18n="cb_sub">Ask anything about crops, diseases, fertilisers, or schemes.</p>
         </div>
         <div class="chat-page-layout">
-          <!-- CHAT WINDOW -->
           <div class="chat-wrap">
             <div class="chat-header">
               <div class="chat-status-dot"></div>
@@ -376,7 +343,6 @@ Type in any language you prefer. 🌾</div>
               <button class="chat-send-btn" onclick="sendMsg()">Send →</button>
             </div>
           </div>
-          <!-- SIDE PANEL: CAMERA + VOICE -->
           <div class="chat-side-panel">
             <div class="cam-panel" id="camPanel">
               <h4>📷 Camera Analysis</h4>
@@ -407,8 +373,6 @@ Type in any language you prefer. 🌾</div>
         </div>
       </div>
     </div>
-
-    <!-- ── FARMER CONNECT ── -->
     <div class="page" id="page-farmerconnect">
       <div class="page-inner">
         <div class="page-header">
@@ -417,7 +381,6 @@ Type in any language you prefer. 🌾</div>
           <p class="page-sub light" data-i18n="fc_sub">Exchange crops, pesticides, fertilizers and equipment with nearby farmers.</p>
         </div>
         <div class="fc-layout">
-          <!-- POST FORM -->
           <div class="fc-post-form">
             <h3 data-i18n="fc_post_h">Post a Request / Offer</h3>
             <p data-i18n="fc_post_p">Tell nearby farmers what you need or what you can share.</p>
@@ -460,7 +423,6 @@ Type in any language you prefer. 🌾</div>
             <button class="btn btn-lime btn-full" onclick="postFCListing()" data-i18n="fc_post_btn">Post Now →</button>
             <div class="fc-success" id="fcPostSuccess">✅ Posted successfully! Farmers can now contact you.</div>
           </div>
-          <!-- LISTINGS -->
           <div>
             <div class="fc-filter-row">
               <button class="fc-filter-btn active" onclick="filterFC(this,'all')">All</button>
@@ -475,8 +437,6 @@ Type in any language you prefer. 🌾</div>
         </div>
       </div>
     </div>
-
-    <!-- ── COLD STORAGE ── -->
     <div class="page" id="page-coldstorage">
       <div class="page-inner">
         <div class="page-header">
@@ -511,8 +471,6 @@ Type in any language you prefer. 🌾</div>
         </div>
       </div>
     </div>
-
-    <!-- ── ABOUT ── -->
     <div class="page" id="page-about">
       <div class="page-inner">
         <div class="page-header">
@@ -540,8 +498,6 @@ Type in any language you prefer. 🌾</div>
         </div>
       </div>
     </div>
-
-    <!-- ── CONTACT ── -->
     <div class="page" id="page-contact">
       <div class="page-inner">
         <div class="page-header">
@@ -582,10 +538,9 @@ Type in any language you prefer. 🌾</div>
       </div>
     </div>
 
-  </div><!-- /page-container -->
-</div><!-- /main-app -->
+  </div>
+</div>
 
-<!-- FC CONTACT MODAL -->
 <div class="fc-modal-overlay" id="fcContactModal">
   <div class="fc-modal">
     <button class="fc-modal-close" onclick="closeFCModal()">✕</button>
@@ -594,8 +549,6 @@ Type in any language you prefer. 🌾</div>
     <div id="fcModalContent"></div>
   </div>
 </div>
-
-<!-- COLD STORAGE BOOKING MODAL -->
 <div class="book-modal-overlay" id="bookModal">
   <div class="book-modal">
     <button class="book-modal-close" onclick="closeBookModal()">✕</button>
