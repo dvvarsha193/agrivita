@@ -1,8 +1,3 @@
-/*  ═══════════════════════════════════════════════
-   AgriVita v6.0 — style.css
-   B.Tech 2nd Year CSE Mini Project
-   Full SPA — Page-based, No Scroll, All Features
-═══════════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Sora:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -20,8 +15,6 @@
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 html, body { height:100%; overflow:hidden; font-family:'Sora',sans-serif; background:var(--g950); color:var(--text); }
 a { text-decoration:none; color:inherit; }
-
-/* ─── LOGIN OVERLAY ─── */
 #login-overlay {
   position:fixed; inset:0; z-index:9999;
   background:linear-gradient(145deg,var(--g950) 0%,var(--g900) 50%,#0d3b14 100%);
@@ -77,11 +70,9 @@ a { text-decoration:none; color:inherit; }
   background:rgba(248,113,113,.08); border-radius:8px; border:1px solid rgba(248,113,113,.2);
 }
 
-/* ─── MAIN APP ─── */
 #main-app { height:100vh; display:flex; flex-direction:column; }
 #main-app.hidden { display:none; }
 
-/* ─── HEADER ─── */
 header {
   height:var(--hh); display:flex; align-items:center; justify-content:space-between;
   padding:0 24px; background:var(--g950); border-bottom:1px solid rgba(255,255,255,.07);
@@ -153,7 +144,6 @@ header {
 .mobile-nav.open { display:flex; }
 .mobile-nav .nav-link { font-size:15px; padding:12px 13px; width:100%; }
 
-/* ─── PAGE SYSTEM ─── */
 #page-container { flex:1; position:relative; overflow:hidden; height:calc(100vh - var(--hh)); }
 .page {
   position:absolute; inset:0; overflow-y:auto; overflow-x:hidden;
@@ -166,7 +156,6 @@ header {
 .page::-webkit-scrollbar-track { background:rgba(255,255,255,.03); }
 .page::-webkit-scrollbar-thumb { background:var(--g600); border-radius:3px; }
 
-/* ─── HOME ─── */
 #page-home {
   background:linear-gradient(145deg,var(--g950) 0%,var(--g900) 60%,#103b17 100%);
   display:flex; flex-direction:column;
@@ -231,7 +220,6 @@ header {
 .home-svc-icon { font-size:24px; margin-bottom:5px; }
 .home-svc-label { font-size:9.5px; font-weight:700; color:rgba(255,255,255,.65); line-height:1.3; }
 
-/* ─── PAGE INNER ─── */
 .page-inner { max-width:1100px; margin:0 auto; padding:28px 24px; }
 .page-header { margin-bottom:24px; }
 .tag { display:inline-flex; align-items:center; background:var(--g100); color:var(--g700); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 11px; border-radius:50px; margin-bottom:8px; }
@@ -243,7 +231,6 @@ header {
 .page-sub.light { color:var(--g300); }
 .page-sub.dark { color:var(--muted); }
 
-/* ─── CROP CALENDAR ─── */
 #page-calendar { background:var(--g900); }
 .month-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px; }
 .m-tab {
@@ -262,7 +249,6 @@ header {
 .crop-name { font-size:12px; font-weight:700; color:var(--white); }
 .crop-info { font-size:10px; color:var(--g300); margin-top:2px; line-height:1.4; }
 
-/* ─── CROP SUGGESTION ─── */
 #page-suggest { background:var(--g900); }
 .suggest-wrap {
   max-width:700px; margin:0 auto; background:rgba(255,255,255,.04);
@@ -275,7 +261,6 @@ header {
 .tip-item { font-size:11px; color:var(--g300); padding:6px 0; border-bottom:1px solid rgba(255,255,255,.05); display:flex; gap:7px; align-items:flex-start; line-height:1.55; }
 .tip-item::before { content:'→'; color:var(--lime); flex-shrink:0; }
 
-/* ─── WEATHER ─── */
 #page-weather { background:var(--g50); }
 .weather-layout { display:grid; grid-template-columns:1.3fr 1fr; gap:18px; }
 .weather-main { background:var(--g800); border-radius:16px; padding:28px; color:var(--white); }
@@ -303,7 +288,6 @@ header {
 .city-input-row input:focus { outline:none; border-color:var(--lime); }
 .city-input-row input::placeholder { color:rgba(255,255,255,.28); }
 
-/* ─── MARKET ─── */
 #page-market { background:var(--white); }
 .market-loc-bar {
   display:flex; align-items:center; gap:12px; padding:12px 16px;
@@ -328,7 +312,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .price-down { color:#dc2626; font-weight:700; }
 .price-stable { color:var(--muted); font-weight:600; }
 
-/* ─── SCHEMES ─── */
 #page-schemes { background:var(--g900); }
 .schemes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
 .scheme-card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:13px; padding:22px 18px; transition:all .3s; }
@@ -339,7 +322,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .scheme-link { color:var(--lime); font-size:11px; font-weight:700; display:inline-flex; align-items:center; gap:4px; transition:gap .2s; }
 .scheme-link:hover { gap:8px; }
 
-/* ─── CHATBOT ─── */
 #page-chatbot { background:var(--g50); }
 .chat-page-layout { display:grid; grid-template-columns:1fr 290px; gap:16px; height:calc(100vh - var(--hh) - 100px); }
 .chat-wrap {
@@ -381,7 +363,7 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .chat-tool-btn:hover { background:var(--g100); border-color:var(--g400); }
 .chat-send-btn { background:var(--g700); color:var(--white); border:none; border-radius:8px; padding:9px 16px; font-size:12px; font-weight:700; cursor:pointer; font-family:'Sora',sans-serif; transition:all .2s; flex-shrink:0; }
 .chat-send-btn:hover { background:var(--g600); }
-/* Chat Side Panel */
+
 .chat-side-panel { display:flex; flex-direction:column; gap:12px; overflow-y:auto; }
 .cam-panel { background:var(--g800); border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:16px; }
 .cam-panel h4 { font-size:12px; font-weight:700; color:var(--white); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
@@ -412,7 +394,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .voice-btn:hover { background:var(--g600); }
 .voice-btn.active { background:rgba(248,113,113,.2); color:#f87171; border:1px solid rgba(248,113,113,.3); }
 
-/* ─── FARMER CONNECT ─── */
 #page-farmerconnect { background:var(--g900); }
 .fc-layout { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .fc-post-form { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:15px; padding:22px; }
@@ -444,7 +425,7 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .fc-filter-btn.active { background:var(--lime); color:var(--g950); border-color:var(--lime); }
 .fc-success { display:none; margin-top:10px; padding:10px; background:rgba(163,230,53,.07); border:1px solid rgba(163,230,53,.18); border-radius:8px; color:var(--lime); font-size:12px; font-weight:600; animation:fadeUp .3s ease; }
 .fc-empty { text-align:center; padding:32px 16px; color:var(--g400); font-size:13px; }
-/* FC Modal */
+
 .fc-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:5000; align-items:center; justify-content:center; padding:20px; }
 .fc-modal-overlay.open { display:flex; animation:fadeUp .2s ease; }
 .fc-modal { background:var(--g900); border:1px solid rgba(255,255,255,.15); border-radius:16px; padding:28px; max-width:460px; width:100%; box-shadow:0 32px 80px rgba(0,0,0,.8); }
@@ -452,7 +433,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .fc-modal p { font-size:12px; color:var(--g300); margin-bottom:18px; }
 .fc-modal-close { float:right; background:none; border:none; color:rgba(255,255,255,.38); font-size:20px; cursor:pointer; line-height:1; }
 
-/* ─── COLD STORAGE ─── */
 #page-coldstorage { background:var(--g50); }
 .cs-layout { display:grid; grid-template-columns:310px 1fr; gap:16px; }
 .cs-left { background:var(--white); border:1.5px solid var(--g200); border-radius:15px; overflow:hidden; display:flex; flex-direction:column; }
@@ -490,7 +470,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .cs-book-btn:hover { background:var(--lime-d); transform:translateY(-1px); }
 .cs-available { display:inline-flex; align-items:center; gap:5px; background:rgba(163,230,53,.1); color:var(--lime); font-size:10px; font-weight:700; padding:3px 9px; border-radius:50px; border:1px solid rgba(163,230,53,.2); margin-bottom:10px; }
 
-/* ─── ABOUT ─── */
 #page-about { background:var(--white); }
 .about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:44px; align-items:start; }
 .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:22px; }
@@ -505,7 +484,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .pi-label { font-size:11px; font-weight:700; color:var(--g700); margin-bottom:2px; }
 .pi-val { font-size:11px; color:var(--muted); line-height:1.6; }
 
-/* ─── CONTACT ─── */
 #page-contact { background:var(--g900); }
 .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; }
 .contact-info { margin-top:18px; display:flex; flex-direction:column; gap:14px; }
@@ -516,7 +494,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .contact-form-box { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:15px; padding:24px; }
 .success-msg { margin-top:11px; padding:11px 14px; background:rgba(163,230,53,.07); border:1px solid rgba(163,230,53,.2); border-radius:9px; color:var(--lime); font-size:12px; font-weight:600; animation:fadeUp .3s ease; }
 
-/* ─── FORMS ─── */
 .form-group { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; }
 .form-group label { font-size:11px; font-weight:600; color:var(--g800); }
 .form-group input, .form-group select, .form-group textarea {
@@ -532,7 +509,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .fd input:focus, .fd select:focus, .fd textarea:focus { border-color:var(--lime); box-shadow:0 0 0 3px rgba(163,230,53,.07); }
 .fd select option { background:var(--g900); color:var(--white); }
 
-/* ─── BUTTONS ─── */
 .btn { display:inline-flex; align-items:center; gap:6px; padding:10px 22px; border-radius:9px; font-size:12px; font-weight:700; cursor:pointer; border:none; transition:all .25s; font-family:'Sora',sans-serif; }
 .btn-lime { background:var(--lime); color:var(--g950); }
 .btn-lime:hover { background:var(--lime-d); transform:translateY(-2px); box-shadow:0 8px 24px rgba(163,230,53,.28); }
@@ -542,7 +518,6 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .btn-ghost:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.52); transform:translateY(-2px); }
 .btn-full { width:100%; justify-content:center; }
 
-/* ─── BOOK MODAL ─── */
 .book-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.75); z-index:5000; align-items:center; justify-content:center; padding:20px; }
 .book-modal-overlay.open { display:flex; animation:fadeUp .2s ease; }
 .book-modal { background:var(--white); border-radius:16px; padding:28px; max-width:420px; width:100%; box-shadow:0 32px 80px rgba(0,0,0,.3); }
@@ -554,12 +529,10 @@ tbody td { padding:10px 15px; font-size:12px; color:var(--text); }
 .book-success h4 { font-size:16px; font-weight:700; color:var(--g800); margin-bottom:5px; }
 .book-success p { font-size:12px; color:var(--muted); }
 
-/* ─── ANIMATIONS ─── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* ─── RESPONSIVE ─── */
 @media(max-width:1024px) {
   header { padding:0 16px; }
   .nav-links { display:none; }
