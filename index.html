@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriVita – Empowering Indian Farmers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LOGIN OVERLAY
+══════════════════════════════════════ -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-icon">🌿</div>
+      <span class="login-logo-name">Agri<span>Vita</span></span>
+    </div>
+    <h2 id="lt-title">Welcome to AgriVita</h2>
+    <p id="lt-sub">Login or register to access all features</p>
+    <div class="login-err" id="loginErr"></div>
+    <div class="login-tabs">
+      <button class="login-tab active" id="tabLogin" onclick="switchLoginTab('login')">Login</button>
+      <button class="login-tab" id="tabReg" onclick="switchLoginTab('register')">Register</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="login-form" id="loginForm">
+      <div class="lf-group">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username">
+      </div>
+      <div class="lf-group">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password">
+      </div>
+      <button class="btn-login" onclick="doLogin()">Login →</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="login-form hidden" id="registerForm">
+      <div class="lf-group">
+        <label>Username *</label>
+        <input type="text" id="regUser" placeholder="Choose a username">
+      </div>
+      <div class="lf-group">
+        <label>Password *</label>
+        <input type="password" id="regPass" placeholder="Create password">
+      </div>
+      <div class="lf-group">
+        <label>Email *</label>
+        <input type="email" id="regEmail" placeholder="your@email.com">
+      </div>
+      <div class="lf-group">
+        <label>Mobile Number *</label>
+        <input type="tel" id="regMobile" placeholder="10-digit mobile number" maxlength="10">
+      </div>
+      <div class="lf-group">
+        <label>Location Access (Recommended)</label>
+        <button class="loc-btn" onclick="requestLocation()" id="locBtn">📍 Get My Location</button>
+        <div id="locStatus"></div>
+      </div>
+      <button class="btn-login" onclick="doRegister()">Register & Login →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MAIN APP
+══════════════════════════════════════ -->
+<div id="main-app" class="hidden">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo" onclick="navigateTo('home')">
+      <div class="logo-icon">🌿</div>
+      <span class="logo-name">Agri<span>Vita</span></span>
+    </div>
+    <nav class="nav-links" id="desktopNav"></nav>
+    <div class="header-right">
+      <div class="user-pill">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span class="user-name" id="userName">User</span>
+      </div>
+      <div class="lang-wrap">
+        <button class="lang-btn" onclick="toggleLangMenu()"><span id="langBtnText">🇬🇧 EN ▾</span></button>
+        <div class="lang-menu" id="langMenu">
+          <button data-lang="en" onclick="setLang('en')">🇬🇧 English</button>
+          <button data-lang="hi" onclick="setLang('hi')">🇮🇳 हिन्दी</button>
+          <button data-lang="te" onclick="setLang('te')">🌿 తెలుగు</button>
+          <button data-lang="kn" onclick="setLang('kn')">🌻 ಕನ್ನಡ</button>
+          <button data-lang="ta" onclick="setLang('ta')">🌺 தமிழ்</button>
+          <button data-lang="ml" onclick="setLang('ml')">🌴 മലയാളം</button>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()" data-i18n="logout">Logout</button>
+      <button class="hamburger" id="ham" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav class="mobile-nav" id="mobileNav"></nav>
+
+  <!-- PAGE CONTAINER -->
+  <div id="page-container">
+
+    <!-- ── HOME ── -->
+    <div class="page active" id="page-home">
+      <div class="hero-section">
+        <div class="hero-inner">
+          <div class="hero-badge" data-i18n="hero_badge">🌱 Smart Agriculture Platform for India</div>
+          <h1><span data-i18n="hero_h1">Grow Smarter.</span> <em data-i18n="hero_h1_em">Farm Better.</em></h1>
+          <p class="hero-desc" data-i18n="hero_desc">AgriVita connects Indian farmers with AI crop advice, real-time weather alerts, live mandi prices, government scheme guidance, and farmer-to-farmer exchange — all in one platform.</p>
+          <div class="hero-btns">
+            <button class="btn btn-lime" onclick="navigateTo('calendar')" data-i18n="hero_btn1">Explore Features →</button>
+            <button class="btn btn-ghost" onclick="navigateTo('farmerconnect')" data-i18n="hero_btn2">🤝 Farmer Connect</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><div class="stat-num">50K+</div><div class="stat-label" data-i18n="stat1">Farmers Connected</div></div>
+            <div class="stat"><div class="stat-num">120+</div><div class="stat-label" data-i18n="stat2">Crop Varieties</div></div>
+            <div class="stat"><div class="stat-num">18</div><div class="stat-label" data-i18n="stat3">States Covered</div></div>
+            <div class="stat"><div class="stat-num">98%</div><div class="stat-label" data-i18n="stat4">Satisfaction</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="marquee-strip">
+        <div class="marquee-track">
+          <span class="marquee-item">🌾 Crop Advisory</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🌦️ Weather Alerts</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">📈 Live Mandi Prices</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🏛️ Government Schemes</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🤖 AI Chatbot</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">📅 Crop Calendar</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🤝 Farmer Connect</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🧊 Cold Storage Finder</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🌾 Crop Advisory</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🌦️ Weather Alerts</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">📈 Live Mandi Prices</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🏛️ Government Schemes</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🤖 AI Chatbot</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">📅 Crop Calendar</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🤝 Farmer Connect</span><span class="marquee-dot">✦</span>
+          <span class="marquee-item">🧊 Cold Storage Finder</span><span class="marquee-dot">✦</span>
+        </div>
+      </div>
+      <div class="home-services">
+        <div class="home-services-grid" id="homeSvcGrid"></div>
+      </div>
+    </div>
+
+    <!-- ── CROP CALENDAR ── -->
+    <div class="page" id="page-calendar">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag tag-dark" data-i18n="cal_tag">Feature 01</span>
+          <h2 class="page-title light" data-i18n="cal_title">Crop Calendar</h2>
+          <p class="page-sub light" data-i18n="cal_sub">Select a month to see which crops to sow in India.</p>
+        </div>
+        <div class="month-tabs" id="monthTabs"></div>
+        <div class="crop-grid" id="cropGrid"></div>
+      </div>
+    </div>
+
+    <!-- ── CROP SUGGESTION ── -->
+    <div class="page" id="page-suggest">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag tag-dark" data-i18n="sug_tag">Feature 02</span>
+          <h2 class="page-title light" data-i18n="sug_title">Smart Crop Suggestion</h2>
+          <p class="page-sub light" data-i18n="sug_sub">Enter your soil, season, and water info to get crop recommendations.</p>
+        </div>
+        <div class="suggest-wrap">
+          <div class="form-row fd">
+            <div class="form-group">
+              <label data-i18n="sug_soil">Soil Type *</label>
+              <select id="soilType">
+                <option value="">Select Soil Type</option>
+                <option value="alluvial">Alluvial Soil (North India plains)</option>
+                <option value="black">Black / Regur Soil (Deccan Plateau)</option>
+                <option value="red">Red Laterite Soil (South India)</option>
+                <option value="loamy">Loamy Soil (Mixed regions)</option>
+                <option value="sandy">Sandy Soil (Rajasthan / Coastal)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-i18n="sug_season">Season *</label>
+              <select id="season">
+                <option value="">Select Season</option>
+                <option value="kharif">Kharif (June – Sep)</option>
+                <option value="rabi">Rabi (Oct – Mar)</option>
+                <option value="zaid">Zaid / Summer (Mar – Jun)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row fd">
+            <div class="form-group">
+              <label data-i18n="sug_state">State</label>
+              <select id="stateSelect">
+                <option value="">Select State</option>
+                <option>Punjab</option><option>Haryana</option><option>Uttar Pradesh</option>
+                <option>Maharashtra</option><option>Tamil Nadu</option><option>Andhra Pradesh</option>
+                <option>Karnataka</option><option>Rajasthan</option><option>Madhya Pradesh</option>
+                <option>Gujarat</option><option>West Bengal</option><option>Bihar</option>
+                <option>Telangana</option><option>Kerala</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-i18n="sug_water">Water Availability</label>
+              <select id="water">
+                <option value="">Select Water Source</option>
+                <option value="high">High – Canal / River / Perennial</option>
+                <option value="medium">Medium – Borewell / Seasonal</option>
+                <option value="low">Low – Rain-fed / Dryland</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-lime btn-full" onclick="getCropSuggestion()" data-i18n="sug_btn">Get Suggestions →</button>
+          <div class="result-box" id="cropResult">
+            <h4 data-i18n="sug_result">🌱 Recommended Crops</h4>
+            <div class="crop-tags" id="cropTags"></div>
+            <div id="cropTips"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEATHER ── -->
+    <div class="page" id="page-weather">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag" data-i18n="wt_tag">Feature 03</span>
+          <h2 class="page-title dark" data-i18n="wt_title">Weather Intelligence</h2>
+          <p class="page-sub dark" data-i18n="wt_sub">Hyperlocal farm-specific weather advisories.</p>
+        </div>
+        <div class="weather-layout">
+          <div class="weather-main">
+            <div style="font-size:44px" id="wIcon">⛅</div>
+            <div class="w-temp" id="wTemp">38°C</div>
+            <div class="w-city" id="wCity"></div>
+            <div class="w-cond" id="wCond">Partly Cloudy · Good for sowing</div>
+            <div class="w-grid">
+              <div class="w-stat"><div class="w-stat-label">Humidity</div><div class="w-stat-val" id="wHumidity">67%</div></div>
+              <div class="w-stat"><div class="w-stat-label">Wind</div><div class="w-stat-val" id="wWind">12 km/h</div></div>
+              <div class="w-stat"><div class="w-stat-label">Rainfall</div><div class="w-stat-val" id="wRain">3 mm</div></div>
+              <div class="w-stat"><div class="w-stat-label">UV Index</div><div class="w-stat-val" id="wUV">Moderate</div></div>
+            </div>
+            <div class="city-input-row">
+              <input type="text" id="cityInput" placeholder="Enter city name..." style="color:#fff">
+              <button class="btn btn-lime" onclick="updateWeather()" style="padding:9px 16px;font-size:11px">Search</button>
+            </div>
+          </div>
+          <div class="alerts-list" id="alertsList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MARKET ── -->
+    <div class="page" id="page-market">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag" data-i18n="mk_tag">Feature 04</span>
+          <h2 class="page-title dark" data-i18n="mk_title">Live Mandi Prices</h2>
+          <p class="page-sub dark" data-i18n="mk_sub">Today's wholesale market rates. Location-based. Updated daily.</p>
+        </div>
+        <div class="market-loc-bar">
+          <span class="loc-text" id="mktLocBar">📍 Detecting your location...</span>
+          <button onclick="updateMarketForLocation()">📍 Update Location</button>
+        </div>
+        <div class="market-wrap">
+          <div class="market-toolbar">
+            <label data-i18n="mk_filter">Filter by State:</label>
+            <select id="mktStateFilter" onchange="filterMarket(this.value)">
+              <option value="all">All States</option>
+              <option value="punjab">Punjab</option>
+              <option value="haryana">Haryana</option>
+              <option value="up">Uttar Pradesh</option>
+              <option value="maha">Maharashtra</option>
+              <option value="gujarat">Gujarat</option>
+              <option value="mp">Madhya Pradesh</option>
+              <option value="rajasthan">Rajasthan</option>
+              <option value="tn">Tamil Nadu</option>
+              <option value="ka">Karnataka</option>
+              <option value="ap">Andhra Pradesh</option>
+              <option value="telangana">Telangana</option>
+              <option value="kerala">Kerala</option>
+            </select>
+            <input class="market-search" type="text" placeholder="Search crop or mandi..." oninput="searchMarket(this.value)">
+            <span id="mktCount" style="font-size:11px;color:var(--muted);margin-left:auto;"></span>
+          </div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Crop</th><th>Mandi</th><th>State</th>
+                  <th>Price (₹/Qtl)</th><th>Min</th><th>Max</th><th>Change</th>
+                </tr>
+              </thead>
+              <tbody id="marketBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SCHEMES ── -->
+    <div class="page" id="page-schemes">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag tag-dark" data-i18n="sc_tag">Feature 05</span>
+          <h2 class="page-title light" data-i18n="sc_title">Government Schemes</h2>
+          <p class="page-sub light" data-i18n="sc_sub">Central and state agricultural support programs.</p>
+        </div>
+        <div class="schemes-grid">
+          <div class="scheme-card"><div class="scheme-badge">Central</div><h3>PM-Kisan Samman Nidhi</h3><p>₹6,000/year directly to farmer families in 3 equal installments of ₹2,000 each. All landholding farmers are eligible.</p><a href="https://pmkisan.gov.in" target="_blank" class="scheme-link">Apply at pmkisan.gov.in →</a></div>
+          <div class="scheme-card"><div class="scheme-badge">Central</div><h3>PM Fasal Bima Yojana</h3><p>Crop insurance at very low premium — 2% for Kharif, 1.5% for Rabi, 5% for commercial crops. Protects against natural calamities.</p><a href="https://pmfby.gov.in" target="_blank" class="scheme-link">Apply at pmfby.gov.in →</a></div>
+          <div class="scheme-card"><div class="scheme-badge">Credit</div><h3>Kisan Credit Card (KCC)</h3><p>Short-term credit up to ₹3 lakh at subsidised interest rates of 4–7% per annum. Covers crop and post-harvest expenses.</p><a href="#" class="scheme-link">Apply at your nearest bank →</a></div>
+          <div class="scheme-card"><div class="scheme-badge">Central</div><h3>Soil Health Card Scheme</h3><p>Free soil testing with NPK and micronutrient analysis. Personalised fertiliser recommendations to improve yield and reduce cost.</p><a href="#" class="scheme-link">Visit nearest KVK →</a></div>
+          <div class="scheme-card"><div class="scheme-badge">Central</div><h3>PM Krishi Sinchai Yojana</h3><p>Subsidies for drip and sprinkler irrigation — up to 55% for small farmers. Promotes "More Crop Per Drop" efficiency.</p><a href="#" class="scheme-link">Apply via state agriculture dept →</a></div>
+          <div class="scheme-card"><div class="scheme-badge">Central</div><h3>eNAM – National Agri Market</h3><p>Online trading platform connecting farmers to buyers across India. Get best prices without going to mandi physically.</p><a href="https://enam.gov.in" target="_blank" class="scheme-link">Register at enam.gov.in →</a></div>
+          <div class="scheme-card"><div class="scheme-badge">Infrastructure</div><h3>Agriculture Infrastructure Fund</h3><p>₹1 lakh crore fund for post-harvest management, cold chain, and storage infrastructure at concessional rates.</p><a href="#" class="scheme-link">Apply via bank/NBFCs →</a></div>
+          <div class="scheme-card"><div class="scheme-badge">Central</div><h3>Paramparagat Krishi Vikas</h3><p>Support for organic farming clusters — ₹50,000/hectare over 3 years. Certification and market linkage support included.</p><a href="#" class="scheme-link">Apply via state agriculture dept →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CHATBOT ── -->
+    <div class="page" id="page-chatbot">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag" data-i18n="cb_tag">Feature 06</span>
+          <h2 class="page-title dark" data-i18n="cb_title">AI Agri Chatbot 🤖</h2>
+          <p class="page-sub dark" data-i18n="cb_sub">Ask anything about crops, diseases, fertilisers, or schemes.</p>
+        </div>
+        <div class="chat-page-layout">
+          <!-- CHAT WINDOW -->
+          <div class="chat-wrap">
+            <div class="chat-header">
+              <div class="chat-status-dot"></div>
+              <div class="chat-header-text">
+                <span data-i18n="cb_name">AgriBot – Your Farming Assistant</span>
+                <small data-i18n="cb_info">AI · 24/7 · Camera + Voice · 6 Languages</small>
+              </div>
+              <div class="chat-lang-pills">
+                <button class="c-pill active" onclick="setChatInputLang('en')">EN</button>
+                <button class="c-pill" onclick="setChatInputLang('hi')">HI</button>
+                <button class="c-pill" onclick="setChatInputLang('te')">TE</button>
+                <button class="c-pill" onclick="setChatInputLang('kn')">KN</button>
+                <button class="c-pill" onclick="setChatInputLang('ta')">TA</button>
+                <button class="c-pill" onclick="setChatInputLang('ml')">ML</button>
+              </div>
+            </div>
+            <div class="chat-body" id="chatBody">
+              <div class="msg msg-bot">🌿 Namaste! I am AgriBot, your AI farming assistant.
+Ask me anything about crops, diseases, fertilizers, irrigation, government schemes, or mandi prices!
+Type in any language you prefer. 🌾</div>
+            </div>
+            <div class="quick-chips" id="quickChips"></div>
+            <div class="chat-out-lang-row">
+              <label data-i18n="cb_out_label">Output Language:</label>
+              <select id="chatOutputLang" onchange="chatOutputLang=this.value">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="te">తెలుగు</option>
+                <option value="kn">ಕನ್ನಡ</option>
+                <option value="ta">தமிழ்</option>
+                <option value="ml">മലയാളം</option>
+              </select>
+            </div>
+            <div class="chat-input-row">
+              <button class="chat-tool-btn" onclick="toggleVoice()" id="voiceBtn" title="Voice Input">🎤</button>
+              <button class="chat-tool-btn" onclick="toggleCameraPanel()" title="Camera">📷</button>
+              <input type="text" id="chatInput" placeholder="Ask about crops, diseases, schemes..." onkeydown="if(event.key==='Enter')sendMsg()">
+              <button class="chat-send-btn" onclick="sendMsg()">Send →</button>
+            </div>
+          </div>
+          <!-- SIDE PANEL: CAMERA + VOICE -->
+          <div class="chat-side-panel">
+            <div class="cam-panel" id="camPanel">
+              <h4>📷 Camera Analysis</h4>
+              <video id="cameraPreview" autoplay muted playsinline></video>
+              <div class="cam-placeholder" id="camPlaceholder" onclick="startCamera()">
+                <span>📷</span>
+                <p>Click to start camera</p>
+              </div>
+              <div class="cam-btns">
+                <button class="cam-btn cam-btn-start" onclick="startCamera()">▶ Start</button>
+                <button class="cam-btn cam-btn-capture" onclick="capturePhoto()">📸 Analyze</button>
+                <button class="cam-btn cam-btn-stop" onclick="stopCamera()">■ Stop</button>
+              </div>
+            </div>
+            <div class="voice-panel">
+              <h4>🎤 Voice Assistant</h4>
+              <div class="voice-status" id="voiceStatus">
+                <span id="voiceStatusText">Voice Assistant Ready</span>
+                <div class="vdots"><div class="vdot"></div><div class="vdot"></div><div class="vdot"></div></div>
+              </div>
+              <button class="voice-btn" id="voiceBtnPanel" onclick="toggleVoice()">🎤 Start Listening</button>
+              <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.35);line-height:1.5">
+                Supports: English, Hindi, Telugu, Kannada, Tamil, Malayalam.<br>
+                Select input language using EN/HI/TE/KN/TA/ML pills above.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FARMER CONNECT ── -->
+    <div class="page" id="page-farmerconnect">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag tag-dark" data-i18n="fc_tag">Feature 07</span>
+          <h2 class="page-title light" data-i18n="fc_title">Farmer–Farmer Connect 🤝</h2>
+          <p class="page-sub light" data-i18n="fc_sub">Exchange crops, pesticides, fertilizers and equipment with nearby farmers.</p>
+        </div>
+        <div class="fc-layout">
+          <!-- POST FORM -->
+          <div class="fc-post-form">
+            <h3 data-i18n="fc_post_h">Post a Request / Offer</h3>
+            <p data-i18n="fc_post_p">Tell nearby farmers what you need or what you can share.</p>
+            <div class="fc-type-tabs">
+              <button class="fc-type-tab active" onclick="setFCType('offer','this')" id="fc-offer-tab" data-i18n="fc_offer">✅ I'm Offering</button>
+              <button class="fc-type-tab" onclick="setFCType('need','this')" id="fc-need-tab" data-i18n="fc_need">🆘 Urgent Need</button>
+            </div>
+            <div class="form-group fd">
+              <label data-i18n="fc_cat">Category</label>
+              <select id="fcCategory">
+                <option value="">Select Category</option>
+                <option value="crop">🌾 Crops / Seeds</option>
+                <option value="pest">🧴 Pesticide</option>
+                <option value="fert">🌱 Fertilizer</option>
+                <option value="equip">🚜 Equipment</option>
+              </select>
+            </div>
+            <div class="form-group fd">
+              <label data-i18n="fc_item">What are you offering / need?</label>
+              <input type="text" id="fcItem" placeholder="e.g. Wheat seeds HD-2967, Urea 3 bags...">
+            </div>
+            <div class="form-row">
+              <div class="form-group fd">
+                <label data-i18n="fc_district">Your District</label>
+                <input type="text" id="fcDistrict" placeholder="e.g. Ludhiana">
+              </div>
+              <div class="form-group fd">
+                <label data-i18n="fc_name">Your Name</label>
+                <input type="text" id="fcName" placeholder="Full name">
+              </div>
+            </div>
+            <div class="form-group fd">
+              <label data-i18n="fc_phone">Contact (Phone / WhatsApp)</label>
+              <input type="tel" id="fcPhone" placeholder="+91 XXXXX XXXXX">
+            </div>
+            <div class="form-group fd">
+              <label data-i18n="fc_details">Details (optional)</label>
+              <textarea id="fcDetails" rows="2" placeholder="Any additional information..."></textarea>
+            </div>
+            <button class="btn btn-lime btn-full" onclick="postFCListing()" data-i18n="fc_post_btn">Post Now →</button>
+            <div class="fc-success" id="fcPostSuccess">✅ Posted successfully! Farmers can now contact you.</div>
+          </div>
+          <!-- LISTINGS -->
+          <div>
+            <div class="fc-filter-row">
+              <button class="fc-filter-btn active" onclick="filterFC(this,'all')">All</button>
+              <button class="fc-filter-btn" onclick="filterFC(this,'crop')">🌾 Crops</button>
+              <button class="fc-filter-btn" onclick="filterFC(this,'pest')">🧴 Pesticide</button>
+              <button class="fc-filter-btn" onclick="filterFC(this,'fert')">🌱 Fertilizer</button>
+              <button class="fc-filter-btn" onclick="filterFC(this,'equip')">🚜 Equipment</button>
+              <span id="fcCount" style="font-size:10px;color:rgba(255,255,255,.4);margin-left:auto;"></span>
+            </div>
+            <div class="fc-listings" id="fcListings"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COLD STORAGE ── -->
+    <div class="page" id="page-coldstorage">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag" data-i18n="cs_tag">Feature 08</span>
+          <h2 class="page-title dark" data-i18n="cs_title">Cold Storage Finder 🧊</h2>
+          <p class="page-sub dark" data-i18n="cs_sub">Find cold storage units near you to store unsold produce and reduce wastage.</p>
+        </div>
+        <div class="cs-layout">
+          <div class="cs-left">
+            <div class="cs-search-area">
+              <h4>🔍 Find Storage Near You</h4>
+              <p>Search by district, city, or storage name</p>
+              <input class="cs-search-input" type="text" placeholder="Search district or name..." id="csSearch" oninput="filterCS(this.value)">
+            </div>
+            <div class="cs-list" id="csList"></div>
+          </div>
+          <div class="cs-right">
+            <div class="cs-map-box">
+              <div class="cs-map-inner">
+                <div class="map-emoji">🗺️</div>
+                <p id="csMapText">Select a storage unit to view location</p>
+                <small>Location-based cold storage finder</small>
+              </div>
+            </div>
+            <div class="cs-detail-box" id="csDetailBox">
+              <div style="text-align:center;padding:30px;color:var(--muted)">
+                <div style="font-size:36px;margin-bottom:10px">🧊</div>
+                <p style="font-size:12px">Select a cold storage from the list to view details and book</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ABOUT ── -->
+    <div class="page" id="page-about">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag" data-i18n="ab_tag">About AgriVita</span>
+          <h2 class="page-title dark" data-i18n="ab_title">Built for Indian Farmers, By Indian Students</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:18px" data-i18n="ab_desc">AgriVita is a B.Tech 2nd Year CSE project. Every farmer deserves access to the same tools that large agribusinesses use. We built this platform to bridge that gap.</p>
+            <div class="why-grid">
+              <div class="why-card"><div class="why-num">01</div><div><h4>AI-Powered</h4><p>Smart crop suggestions, chatbot, and disease detection using camera analysis.</p></div></div>
+              <div class="why-card"><div class="why-num">02</div><div><h4>Multilingual</h4><p>Full support for 6 Indian languages — Hindi, Telugu, Kannada, Tamil, Malayalam.</p></div></div>
+              <div class="why-card"><div class="why-num">03</div><div><h4>Real-time Data</h4><p>Live mandi prices from 500+ markets, daily weather from IMD, location-based.</p></div></div>
+              <div class="why-card"><div class="why-num">04</div><div><h4>Farmer-First</h4><p>Farmer-to-Farmer connect, cold storage finder, government scheme guidance.</p></div></div>
+            </div>
+          </div>
+          <div class="project-info-card">
+            <div class="pi-item"><div class="pi-icon">🎓</div><div><div class="pi-label">Project Type</div><div class="pi-val">B.Tech 2nd Year CSE Mini Project</div></div></div>
+            <div class="pi-item"><div class="pi-icon">🛠️</div><div><div class="pi-label">Tech Stack</div><div class="pi-val">HTML, CSS, JavaScript (Vanilla SPA)</div></div></div>
+            <div class="pi-item"><div class="pi-icon">🌐</div><div><div class="pi-label">Languages Supported</div><div class="pi-val">English, Hindi, Telugu, Kannada, Tamil, Malayalam</div></div></div>
+            <div class="pi-item"><div class="pi-icon">🤖</div><div><div class="pi-label">AI Features</div><div class="pi-val">Chatbot with voice & camera, crop suggestion engine, disease detection</div></div></div>
+            <div class="pi-item"><div class="pi-icon">📊</div><div><div class="pi-label">Data Coverage</div><div class="pi-val">500+ mandis, 18 states, 120+ crop varieties, 30+ cold storage units</div></div></div>
+            <div class="pi-item"><div class="pi-icon">🎯</div><div><div class="pi-label">Mission</div><div class="pi-val">Bridge the digital divide between Indian farmers and modern agricultural technology</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTACT ── -->
+    <div class="page" id="page-contact">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="tag tag-dark" data-i18n="ct_tag">Contact Us</span>
+          <h2 class="page-title light" data-i18n="ct_title">Get in Touch</h2>
+          <p class="page-sub light" data-i18n="ct_sub">Have questions? Reach out in any language!</p>
+        </div>
+        <div class="contact-grid">
+          <div>
+            <div class="contact-info">
+              <div class="contact-item"><span>📞</span><div><strong>Kisan Helpline (Free)</strong><p>1800-180-1551 · Mon–Sat 8AM–8PM</p></div></div>
+              <div class="contact-item"><span>📧</span><div><strong>Email</strong><p>support@agrivita.in</p></div></div>
+              <div class="contact-item"><span>📍</span><div><strong>Developed At</strong><p>B.Tech CSE Department · India</p></div></div>
+              <div class="contact-item"><span>🤖</span><div><strong>24/7 AI Support</strong><p>Use our AI Chatbot anytime for instant help</p></div></div>
+            </div>
+          </div>
+          <div class="contact-form-box fd">
+            <div class="form-group fd">
+              <label data-i18n="ct_name">Full Name</label>
+              <input type="text" id="ctName" placeholder="Your full name">
+            </div>
+            <div class="form-group fd">
+              <label data-i18n="ct_phone">Phone / WhatsApp</label>
+              <input type="tel" id="ctPhone" placeholder="+91 XXXXX XXXXX">
+            </div>
+            <div class="form-group fd">
+              <label data-i18n="ct_state">State / District</label>
+              <input type="text" id="ctState" placeholder="e.g. Punjab / Ludhiana">
+            </div>
+            <div class="form-group fd">
+              <label data-i18n="ct_msg">Message</label>
+              <textarea id="ctMsg" rows="4" placeholder="Your message..."></textarea>
+            </div>
+            <button class="btn btn-lime btn-full" onclick="submitContact()" data-i18n="ct_btn">Send Message →</button>
+            <div class="success-msg" id="ctSuccess" style="display:none">✅ Message sent! We'll respond within 24 hours. You can also call 1800-180-1551 for instant help.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-container -->
+</div><!-- /main-app -->
+
+<!-- FC CONTACT MODAL -->
+<div class="fc-modal-overlay" id="fcContactModal">
+  <div class="fc-modal">
+    <button class="fc-modal-close" onclick="closeFCModal()">✕</button>
+    <h3 id="fcModalTitle">Contact Farmer</h3>
+    <p id="fcModalDesc"></p>
+    <div id="fcModalContent"></div>
+  </div>
+</div>
+
+<!-- COLD STORAGE BOOKING MODAL -->
+<div class="book-modal-overlay" id="bookModal">
+  <div class="book-modal">
+    <button class="book-modal-close" onclick="closeBookModal()">✕</button>
+    <h3 id="bookModalTitle">Book Cold Storage</h3>
+    <p id="bookModalSubtitle"></p>
+    <div id="bookModalForm">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="bookName" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="tel" id="bookPhone" placeholder="+91 XXXXX XXXXX">
+      </div>
+      <div class="form-group">
+        <label>Crop / Produce to Store</label>
+        <input type="text" id="bookCrop" placeholder="e.g. Potato, Onion, Tomato">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Quantity (Quintal)</label>
+          <input type="number" id="bookQty" placeholder="e.g. 50">
+        </div>
+        <div class="form-group">
+          <label>Duration (Days)</label>
+          <input type="number" id="bookDays" placeholder="e.g. 30">
+        </div>
+      </div>
+      <button class="btn btn-lime btn-full" onclick="confirmBooking()" style="margin-top:4px">Confirm Booking →</button>
+    </div>
+    <div class="book-success" id="bookSuccess">
+      <div class="big-emoji">✅</div>
+      <h4>Booking Confirmed!</h4>
+      <p id="bookSuccessMsg"></p>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
