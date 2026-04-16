@@ -1,14 +1,3 @@
-/* ═══════════════════════════════════════════════
-   AgriVita v6.0 — app.js
-   B.Tech 2nd Year CSE Mini Project
-   FIXED: Language switching, chatbot output lang,
-          login page, mandi location, cold storage,
-          voice+camera chatbot, page-based SPA
-═══════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════
-   1. TRANSLATIONS
-══════════════════════════════════════ */
 const T = {
   en:{
     nav_home:'Home',nav_calendar:'Crop Calendar',nav_suggest:'Crop Suggestion',
@@ -209,9 +198,6 @@ function setLang(lang){
   renderHomeServices();
 }
 
-/* ══════════════════════════════════════
-   2. LOGIN SYSTEM
-══════════════════════════════════════ */
 let currentUser = null;
 let userLocation = null;
 let detectedState = 'Punjab';
@@ -315,9 +301,6 @@ function doLogout(){
   stopCamera();
 }
 
-/* ══════════════════════════════════════
-   3. PAGE NAVIGATION
-══════════════════════════════════════ */
 let currentPage = 'home';
 
 const PAGE_DEFS = [
@@ -388,9 +371,6 @@ document.addEventListener('click',e=>{
   if(!e.target.closest('.lang-wrap')) document.getElementById('langMenu').classList.remove('open');
 });
 
-/* ══════════════════════════════════════
-   4. HOME SERVICES GRID
-══════════════════════════════════════ */
 const HOME_SERVICES=[
   {page:'calendar',icon:'📅',lbl:'nav_calendar'},
   {page:'suggest',icon:'🌱',lbl:'nav_suggest'},
@@ -411,9 +391,6 @@ function renderHomeServices(){
     </div>`).join('');
 }
 
-/* ══════════════════════════════════════
-   5. CROP CALENDAR
-══════════════════════════════════════ */
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const CALENDAR={
   Jan:[{e:'🌾',n:'Wheat',i:'Rabi · Low water'},{e:'🧅',n:'Onion',i:'Rabi · Medium'},{e:'🥔',n:'Potato',i:'Rabi · Medium'},{e:'🥦',n:'Mustard',i:'Rabi · Low'},{e:'🫘',n:'Chickpea',i:'Rabi · Low'}],
@@ -439,10 +416,6 @@ function renderCalendar(){
   ).join('');
 }
 function selectMonth(m){ activeMonth=m; renderCalendar(); }
-
-/* ══════════════════════════════════════
-   6. CROP SUGGESTION
-══════════════════════════════════════ */
 const CROP_DB={
   alluvial:{kharif:{high:['🌾 Paddy','🌿 Sugarcane','🫘 Soybean','🌽 Maize'],medium:['🌾 Paddy','🌽 Maize','🌿 Jute'],low:['🌽 Maize','🫘 Arhar','🌾 Bajra']},rabi:{high:['🌾 Wheat','🥔 Potato','🧅 Onion'],medium:['🌾 Wheat','🥦 Mustard','🫘 Chickpea'],low:['🥦 Mustard','🫘 Lentil','🫘 Chickpea']},zaid:{high:['🍅 Tomato','🥒 Cucumber','🍉 Watermelon'],medium:['🌿 Moong','🌽 Maize'],low:['🌿 Moong','🫘 Cowpea']}},
   black:{kharif:{high:['🌿 Cotton','🫘 Soybean','🌾 Jowar'],medium:['🌿 Cotton','🫘 Soybean','🌾 Bajra'],low:['🌾 Jowar','🌾 Bajra','🫘 Arhar']},rabi:{high:['🌾 Wheat','🫘 Chickpea','🥦 Safflower'],medium:['🫘 Chickpea','🌾 Wheat','🌻 Sunflower'],low:['🫘 Chickpea','🥦 Safflower']},zaid:{high:['🍅 Tomato','🥒 Brinjal'],medium:['🌿 Moong','🫑 Chilli'],low:['🌿 Moong','🫘 Cowpea']}},
@@ -473,9 +446,6 @@ function getCropSuggestion(){
   document.getElementById('cropResult').style.display='block';
 }
 
-/* ══════════════════════════════════════
-   7. WEATHER
-══════════════════════════════════════ */
 const WEATHER_DB={
   default:{temp:'38°C',city:'Guntur,Andhra Pradesh',cond:'Partly Cloudy · Good for sowing',icon:'⛅',humidity:'67%',wind:'12 km/h',rain:'3 mm',uv:'Moderate',alerts:[{icon:'🌡️',label:'Temperature',val:'28°C – Warm, ideal for Kharif crops'},{icon:'💧',label:'Humidity',val:'67% – Moderate, watch for fungal disease',warn:true},{icon:'🌬️',label:'Wind',val:'12 km/h – Light breeze, safe for spraying'},{icon:'☀️',label:'UV Index',val:'Moderate – Use protective gear'},{icon:'🌧️',label:'Rain Forecast',val:'Light rain expected in 2 days',warn:true},{icon:'🌱',label:'Farm Advisory',val:'Good time to apply basal fertilizer'}]},
   delhi:{temp:'35°C',city:'Delhi NCR',cond:'Sunny & Hot · Irrigate crops',icon:'☀️',humidity:'45%',wind:'18 km/h',rain:'0 mm',uv:'High',alerts:[{icon:'🌡️',label:'Temperature',val:'35°C – Very hot, irrigate in evening'},{icon:'💧',label:'Humidity',val:'45% – Low, increase irrigation',warn:true},{icon:'☀️',label:'UV Index',val:'High – Avoid working 11AM–3PM',warn:true},{icon:'🌱',label:'Farm Advisory',val:'Apply mulch to reduce moisture loss'}]},
@@ -529,10 +499,6 @@ function loadWeatherForLocation(){
   else if(state.includes('west bengal')||state.includes('bihar')) setWeatherData(WEATHER_DB.kolkata);
   else setWeatherData(WEATHER_DB.default);
 }
-
-/* ══════════════════════════════════════
-   8. MARKET PRICES — LOCATION BASED
-══════════════════════════════════════ */
 const ALL_MARKET_DATA=[
   {crop:'🌾 Wheat',mandi:'Ludhiana',state:'punjab',price:2250,min:2180,max:2310,change:45,trend:'up'},
   {crop:'🌾 Paddy (Basmati)',mandi:'Amritsar',state:'punjab',price:3800,min:3700,max:3950,change:120,trend:'up'},
@@ -596,9 +562,6 @@ function renderMarket(){
   }).join(''):`<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--muted)">No results found.</td></tr>`;
 }
 
-/* ══════════════════════════════════════
-   9. AI CHATBOT — WITH MULTILINGUAL OUTPUT
-══════════════════════════════════════ */
 const BOT_KB=[
   {k:['yellow','leaves','yellowing'],r:{
     en:'🍂 Yellow leaves can indicate:\n1. Nitrogen deficiency → apply urea @ 45 kg/acre\n2. Rust disease → spray Propiconazole 25EC @ 1ml/L\n3. Waterlogging → improve field drainage\n4. Iron deficiency → spray ferrous sulphate 0.5%',
@@ -745,7 +708,6 @@ function sendChip(txt){
   setTimeout(()=>{ hideTyping(); addMsg(getBotReply(txt),'bot'); },900);
 }
 
-/* Camera */
 let cameraStream=null;
 async function startCamera(){
   try{
@@ -788,8 +750,6 @@ function toggleCameraPanel(){
   const cp=document.getElementById('camPanel');
   if(cp) cp.scrollIntoView({behavior:'smooth'});
 }
-
-/* Voice */
 let recognition=null, isListening=false;
 const VOICE_LANG_CODES={en:'en-IN',hi:'hi-IN',te:'te-IN',kn:'kn-IN',ta:'ta-IN',ml:'ml-IN'};
 function toggleVoice(){
@@ -827,10 +787,6 @@ function toggleVoice(){
   };
   recognition.start();
 }
-
-/* ══════════════════════════════════════
-   10. FARMER CONNECT
-══════════════════════════════════════ */
 let fcListings=[
   {id:1,type:'offer',category:'crop',item:'Wheat seeds (HD-2967) — 2 bags extra',district:'Ludhiana',name:'Ramesh Kumar',phone:'+91 98765 43210',details:'Bought 2 extra bags. Can share at cost price. Good germination quality.',time:'2 hours ago'},
   {id:2,type:'need',category:'fert',item:'URGENTLY need Urea — 3 bags',district:'Amritsar',name:'Gurpreet Singh',phone:'+91 87654 32109',details:'Crop showing nitrogen deficiency. Need 3 bags urgently. Will pay full market rate.',time:'4 hours ago'},
@@ -920,10 +876,6 @@ function postFCListing(){
   s.style.display='block';
   setTimeout(()=>s.style.display='none',4000);
 }
-
-/* ══════════════════════════════════════
-   11. COLD STORAGE FINDER
-══════════════════════════════════════ */
 const COLD_STORAGE_DATA=[
   {id:1,name:'Punjab Cold Chain Ltd',district:'Ludhiana',state:'Punjab',addr:'GT Road, Ludhiana – 141001',capacity:'5000 MT',temp:'-2 to 5°C',rate:'₹8/kg/month',phone:'+91 98140 12345',avail:'Available',tags:['Potato','Onion','Apple'],lat:30.90,lng:75.85},
   {id:2,name:'Kisan Cold Storage',district:'Amritsar',state:'Punjab',addr:'Near Grain Market, Amritsar – 143001',capacity:'3000 MT',temp:'0 to 4°C',rate:'₹10/kg/month',phone:'+91 98157 23456',avail:'Available',tags:['Vegetables','Fruits'],lat:31.63,lng:74.87},
@@ -943,7 +895,6 @@ let csData=[...COLD_STORAGE_DATA];
 let selectedCS=null;
 
 function renderColdStorage(){
-  // Auto-filter by user's state
   const userState=currentUser?.state||detectedState||'Punjab';
   const filtered=csData.filter(s=>s.state.toLowerCase()===userState.toLowerCase());
   const displayData=filtered.length?filtered:csData;
@@ -1019,10 +970,6 @@ function confirmBooking(){
   document.getElementById('bookSuccess').style.display='block';
   document.getElementById('bookSuccessMsg').textContent=`Booking confirmed for ${name}! ${qty||'N/A'} Qtl of ${crop} for ${days||'N/A'} days at ${s?.name||'storage unit'}. Our team will call you at ${phone} within 2 hours.`;
 }
-
-/* ══════════════════════════════════════
-   12. CONTACT
-══════════════════════════════════════ */
 function submitContact(){
   const name=document.getElementById('ctName').value.trim();
   const phone=document.getElementById('ctPhone').value.trim();
@@ -1039,10 +986,6 @@ function submitContact(){
     btn.textContent=t('ct_btn'); btn.disabled=false;
   },1200);
 }
-
-/* ══════════════════════════════════════
-   13. INIT
-══════════════════════════════════════ */
 function initApp(){
   buildNav();
   renderCalendar();
@@ -1053,6 +996,4 @@ function initApp(){
   applyTranslations();
   updateMarketForLocation();
 }
-
-// Start
 document.addEventListener('DOMContentLoaded', initLogin);
